@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+# React Counter 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In this small counter app i have learned about the **``React useState Hook``** 
 
-## Available Scripts
+- The useState hook is a build-in hook in React that allows functional components to manage state.
+- It provides a way to add stateful behavior to functional components without the need for class components.
+- With the useState hook, we can declare and update state variables within the body of a functional components.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Basic Syntax -
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```jsx
+import { useState } from 'react';
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+const MyComponent = () => {
+    const [ state, setState ] = useState(initialStateValue);
 
-### `npm test`
+    // REST OF THE COMPONENT CODE
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    return (
 
-### `npm run build`
+        // JSX REPRESENTATION OF COMPONENT'S UI
+    );
+};
+```
+### Syntax Break Down -
+- ``Importing useState`` :- Import the useState function / hook from the 'react' package.
+- ``Declaring state`` :- Declare a state variable using array destructuring.
+    - The 'state' variable holds the current value of state.
+    - The 'setState' function is used to update the state.
+    - we can choose any names for these variables & update functions.
+- ``Initial State`` :- Pass an initaial value of the useState function. This value will be used as the initial state of the state variable.
+- ``Updating State`` :- To update the state, we call the 'setState' function and padd the new value. React will re-render the component and update the UI with the new state value.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## React Counter Component Code -
+```jsx
+import React from 'react';
+import { useState } from 'react';
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+const Counter = () => {
+    const [count, setCount] = useState(0);
 
-### `npm run eject`
+    const handleIncrement = () => {
+        setCount(count + 1);
+    }
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    const handleDecrement = () => {
+        if (count > 0) {
+            setCount(count - 1);
+        }
+    }
+  return (
+    <>
+      <h1 className='counter'>{count}</h1>
+      <div className="btn-container">
+        <button className="btn" type='button' onClick={handleDecrement}>
+            Decrement Count
+        </button>
+        <button className="btn" type='button' onClick={handleIncrement}>
+            Increment Count
+        </button>
+      </div>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    </>
+  )
+}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+export default Counter
+```
+### Code logic - 
+- import useState function from 'react' package in order to use the useState hook in our project.
+- create an default export react arrow function named 'Counter'.
+- inside the counter component destructure the two values of useState function i.e. count (variable to hold the current state), setCount (function to update the state), also define the initial value of our count variable to 0.
+- now we need an element to dynamically display our count value, to achieve that we created a h1 element and use our count variable inside h1 element.
+- now we need two buttons - one for increment the value by 1, other for decrement the value by 1.
+- to make our buttons functional we need to target some event (like - onClick [whenever a user click on the button do something]).
+- now we need to handle that onClick event, basically we need event handler functions to tell react what to do when this particular button is clicked.
+- so here we have two event handler functions i.e. handleIncrement() and handleDecrement ().
+- inside these functions we need to update our state value. (i.e. count value).
+- for increment we simply increment count by 1.
+- for decrement we need to check if count > 0 only thwn decrement count by 1. because we do not want our counter to display -ve values or go below Zero.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## Output -
+![React-Counter](src/images/react-counter.jpg)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> All files are given in the ``src`` folder.
 
-### Code Splitting
+> Download project and extract it.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+> Open project in your CLI.
 
-### Analyzing the Bundle Size
+> Open terminal and type ``npm i`` or ``npm install`` to install all the dependencies.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+> Type ``npm start`` in the terminal to run the app.
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# THANK-YOU !
